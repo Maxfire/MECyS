@@ -1,30 +1,31 @@
 <?php
-// Conexión a la base de datos (supón que la base de datos ya existe)
-$conexion = new mysqli("localhost", "usuario", "contraseña", "base_de_datos");
+// Version in English
+// Database connection (assume the database already exists)
+$connection = new mysqli("localhost", "user", "password", "database");
 
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+if ($connection->connect_error) {
+    die("Connection error: " . $connection->connect_error);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario = $_POST['usuario'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Consulta SQL vulnerable
-    $query = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND password = '$password'";
-    $resultado = $conexion->query($query);
+    // Vulnerable SQL query
+    $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+    $result = $connection->query($query);
 
-    if ($resultado->num_rows > 0) {
-        echo "Inicio de sesión exitoso. Bienvenido, " . $usuario . "!";
+    if ($result->num_rows > 0) {
+        echo "Login successful. Welcome, " . $username . "!";
     } else {
-        echo "Usuario o contraseña incorrectos.";
+        echo "Incorrect username or password.";
     }
 }
 ?>
 
-<!-- Formulario de inicio de sesión -->
+<!-- Login form -->
 <form method="POST">
-    Usuario: <input type="text" name="usuario" required>
-    Contraseña: <input type="password" name="password" required>
-    <input type="submit" value="Iniciar sesión">
+    Username: <input type="text" name="username" required>
+    Password: <input type="password" name="password" required>
+    <input type="submit" value="Login">
 </form>
