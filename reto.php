@@ -1,4 +1,5 @@
 <?php
+// Version en Español.
 // Conexión a la base de datos (supón que la base de datos ya existe)
 $conexion = new mysqli("localhost", "usuario", "contraseña", "base_de_datos");
 
